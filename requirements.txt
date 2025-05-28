@@ -1,5 +1,5 @@
-streamlit
-pandas
-openpyxl
-beautifulsoup4
-requests
+streamlit==1.28.0
+pandas==2.0.3
+openpyxl==3.1.2
+requests==2.31.0
+openai==0.28.0
