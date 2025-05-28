@@ -1,42 +1,30 @@
 import streamlit as st
 import pandas as pd
-from constants import state_list
-from utils import process_excel
 
-st.set_page_config(
-    page_title="AdvaitInsight - KOL AI Agent",
-    page_icon="🧠",
-    layout="centered"
-)
+# List of Indian states
+states = [
+    "Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh",
+    "Chhattisgarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Goa", "Gujarat", "Haryana",
+    "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Lakshadweep",
+    "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Mumbai", "Nagaland", "Odisha",
+    "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh",
+    "Uttarakhand", "West Bengal"
+]
 
-st.title("🤖 AdvaitInsight - Healthcare Research AI Agent")
-st.markdown("Autofill institute & personnel data for selected state using AI agent.")
+st.set_page_config(page_title="Advait Excel Auto-Filler", layout="wide")
 
-uploaded_file = st.file_uploader(
-    label="📤 Upload Excel File (.xlsx format only)",
-    type=["xlsx"]
-)
+st.title("🔬 Advait Healthcare Data Filler")
 
-selected_state = st.selectbox("🌍 Select State:", state_list)
+uploaded_file = st.file_uploader("📤 Upload your blank Excel file", type=["xlsx"])
 
-if st.button("✨ Autofill State Data"):
-    if uploaded_file is not None and selected_state:
-        df = pd.read_excel(uploaded_file, engine="openpyxl")
-        filled_df = process_excel(df, selected_state)
-        st.success("✅ Data filled for selected state.")
+selected_state = st.selectbox("📍 Select a State to Fetch Data From", states)
 
-        # To generate downloadable Excel, we need to save the DataFrame in-memory
-        from io import BytesIO
-        output = BytesIO()
-        with pd.ExcelWriter(output, engine='openpyxl') as writer:
-            filled_df.to_excel(writer, index=False)
-        processed_data = output.getvalue()
-
-        st.download_button(
-            label="📥 Download Completed Excel File",
-            data=processed_data,
-            file_name=f"{selected_state}_filled.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
-    else:
-        st.warning("⚠️ Please upload a file and select a state first.")
+if uploaded_file and selected_state:
+    df = pd.read_excel(uploaded_file)
+    st.success(f"✅ File uploaded successfully. State selected: {selected_state}")
+    
+    if st.button("🔍 Start Auto-Fill"):
+        st.info("⏳ Processing... please wait.")
+        # Placeholder for future logic
+        st.warning("⚠️ Autofill logic not yet implemented.")
+        st.dataframe(df.head())
