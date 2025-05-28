@@ -5,7 +5,7 @@ def get_institutes_by_state(state):
     query = f"top life science research institutes in {state} India site:.ac.in"
     headers = {"User-Agent": "Mozilla/5.0"}
     search_url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
-    
+
     response = requests.get(search_url, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
     
