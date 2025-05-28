@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+import sys
+import os
+sys.path.append(os.getcwd())
 from excel_generator import create_excel_for_state
 from constants import STATES
 
