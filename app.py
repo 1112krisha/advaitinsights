@@ -6,14 +6,12 @@ st.title("🔍 ADVAIT INSIGHTS - Market Research Dashboard")
 
 df = get_data_from_sheet()
 
-# Filters
 with st.sidebar:
     st.header("📂 Filter Insights")
     category = st.multiselect("Category", df["Category"].unique())
     insight_type = st.multiselect("Insight Type", df["Insight Type"].unique())
     priority = st.multiselect("Priority", df["Priority"].unique())
 
-# Apply filters
 if category:
     df = df[df["Category"].isin(category)]
 if insight_type:
@@ -21,7 +19,6 @@ if insight_type:
 if priority:
     df = df[df["Priority"].isin(priority)]
 
-# Show Insights
 st.subheader("📊 Latest Insights")
 for _, row in df.iterrows():
     st.markdown(f"### {row['Company Name']} | {row['What Happened']}")
