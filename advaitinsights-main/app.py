@@ -1,10 +1,10 @@
 import streamlit as st
-from utils.gsheet import get_data_from_sheet
+from utils.data_loader import get_data_from_csv
 
 st.set_page_config(page_title="Advait Insights", layout="wide")
 st.title("🔍 ADVAIT INSIGHTS - Market Research Dashboard")
 
-df = get_data_from_sheet()
+df = get_data_from_csv()
 
 with st.sidebar:
     st.header("📂 Filter Insights")
